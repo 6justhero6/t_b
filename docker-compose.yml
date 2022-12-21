@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    expose:
+      - '5000'
+    ports:
+      - '5000:5000'
+    links:
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/todo?schema=public
+      - PORT=5000
+      - JWT_SECRET=ljwgfugigewyfyudj
+      - COOKIE_SECRET=3y2hfewiubkwgye
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: 'todo'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+    ports:
+      - '5432:5432'
+    volumes:
+      - /data/db:/var/lib/postgresql/data
+
+volumes:
+  pg_volume:
