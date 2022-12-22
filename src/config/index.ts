@@ -5,6 +5,7 @@ export enum EnvVars {
   PORT = 'PORT',
   JWT_SECRET = 'JWT_SECRET',
   COOKIE_SECRET = 'COOKIE_SECRET',
+  ORIGIN = 'ORIGIN',
 }
 
 export function safeGetEnvVar(name: EnvVars): string {
